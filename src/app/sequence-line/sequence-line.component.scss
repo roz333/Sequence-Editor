@@ -1,0 +1,14 @@
+.mySvg {
+  overflow: visible;
+
+  .showRect,
+  .showRectSec, .showRectThird {
+    display: block;
+  }
+
+  .hideRect{
+    display: none;
+  }
+  
+
+}
