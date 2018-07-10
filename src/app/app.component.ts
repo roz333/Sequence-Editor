@@ -116,11 +116,16 @@ export class AppComponent implements OnInit {
     } else {
       const seq1: ISequence = this.arrSequences.find((seq: ISequence) => InputIndexNum >= seq.from && InputIndexNum <= seq.to);
       if (seq1.annotations.length > 0) {
+        let flag = false;
         seq1.annotations.forEach(item => {
-          this.errorFlag = true;
           if (item.index === InputIndexNum) {
             this.errorFlag = false;
+            flag = true;
             this.scrollGotoIndex.nativeElement.scrollTop = this.arrSequences.indexOf(seq1) * 40;
+            console.log('happy item.index', item.index);
+          } else if (!flag) {
+            this.errorFlag = true;
+            console.log('else', item.index);
           }
         });
       } else {
