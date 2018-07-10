@@ -1,0 +1,80 @@
+.controllers {
+  display: flex;
+  justify-content: space-evenly;
+  width: 900px;
+  margin-bottom: 30px;
+
+  div {
+    label.deleteButton,
+    label.gotoButton {
+      width: 100px;
+      background-color: #e6e6e6;
+      padding: 3px 6px;
+      margin: 0;
+      font: 400 13.3333px Arial;
+      border: 1px solid gray;
+      margin-right: 10px;
+    }
+
+    .errorMessage {
+      display: inherit;
+      color: red;
+      font-size: 15px;
+      width: 190px;
+      margin: 0;
+      text-align: left;
+    }
+  }
+
+  .container {
+    .form-control {
+      position: relative;
+      margin-bottom: 20px;
+
+      label {
+        width: 45px;
+        display: inline-block;
+        text-align: left;
+      }
+
+      .help-block {
+        position: absolute;
+        left: 0;
+        right: auto;
+        width: 245px;
+        top: 20px;
+        display: block;
+        color: #ff0000;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+.numc {
+  display: flex;
+  justify-content: flex-start;
+  font: 18.5px 'Sofadi One', cursive;
+  margin-left: 70px;
+}
+
+.page_scroller {
+  width: 950px;
+  height: auto;
+  max-height: 600px;
+  overflow-y: scroll;
+  display: block;
+  position: relative;
+
+  .sequences {
+    display: flex;
+    justify-content: flex-start;
+    font: 18px 'Sofadi One', cursive;
+
+    span {
+      color: #b8b8b8;
+      width: 50px;
+      text-align: center;
+    }
+  }
+}

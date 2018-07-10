@@ -14,8 +14,6 @@ export class AppComponent implements OnInit {
   title = 'Sequence Editor';
   private sequences: any;
   public errorFlag: boolean;
-  public errorFlagDel: boolean;
-  public errorFlagDel2: boolean;
   public arrSequences: Sequences;
   public index: number[];
   signupForm: FormGroup;
@@ -33,8 +31,6 @@ export class AppComponent implements OnInit {
       'tooltip': new FormControl(null, [Validators.required])
     });
     this.errorFlag = false;
-    this.errorFlagDel = false;
-    this.errorFlagDel2 = false;
     this.index = [];
     this.arrSequences = [];
     this.getSequences();
@@ -74,31 +70,23 @@ export class AppComponent implements OnInit {
   }
 
   deleteAnnotation(inputIndex) {
-    this.errorFlagDel = false;
-    this.errorFlagDel2 = false;
-    const InputIndexNum = Number(inputIndex);
-    if (!this.checksStringWithRegex(inputIndex) && this.checkNumberRange(InputIndexNum)) {
-      const seq1: ISequence = this.arrSequences.find((seq: ISequence) => InputIndexNum >= seq.from && InputIndexNum <= seq.to);
+
+    const thisInputIndex = Number(inputIndex);
+    if (!this.checksStringWithRegex(inputIndex)) {
+      const seq1: ISequence = this.arrSequences.find((seq: ISequence) => thisInputIndex >= seq.from && thisInputIndex <= seq.to);
       if (seq1.annotations.length > 0) {
         const seqAnn = seq1.annotations;
         for (let i = 0; i < seqAnn.length; i++) {
-          this.errorFlagDel2 = false;
           const AnnRange = seqAnn[i].index + seqAnn[i].length;
-          if (AnnRange > seq1.to && seqAnn[i].index === InputIndexNum) {
+          if (AnnRange > seq1.to && seqAnn[i].index === thisInputIndex) {
             seq1.deleteRect2 = true;
             this.deleteAnnINSeq(seq1, seqAnn, i, inputIndex);
-          } else if (AnnRange <= seq1.to && seqAnn[i].index === InputIndexNum) {
+          } else if (AnnRange <= seq1.to && seqAnn[i].index === thisInputIndex) {
             seq1.deleteRect1 = true;
             this.deleteAnnINSeq(seq1, seqAnn, i, inputIndex);
-          } else {
-            this.errorFlagDel2 = true;
           }
         }
-      } else {
-        this.errorFlagDel2 = true;
       }
-    } else {
-      this.errorFlagDel = true;
     }
   }
 
@@ -109,16 +97,13 @@ export class AppComponent implements OnInit {
   }
 
   goToAnnotation(inputIndex) {
-    this.errorFlag = false;
-    const InputIndexNum = Number(inputIndex);
-    if (this.checksStringWithRegex(inputIndex) || !(this.checkNumberRange(InputIndexNum))) {
+    if (this.checksStringWithRegex(inputIndex)) {
       this.errorFlag = true;
     } else {
-      const seq1: ISequence = this.arrSequences.find((seq: ISequence) => InputIndexNum >= seq.from && InputIndexNum <= seq.to);
-      if (seq1.annotations.length > 0) {
+      const seq1: ISequence = this.arrSequences.find((seq: ISequence) => Number(inputIndex) >= seq.from && Number(inputIndex) <= seq.to);
+      if (typeof seq1.annotations !== 'undefined') {
         seq1.annotations.forEach(item => {
-          this.errorFlag = true;
-          if (item.index === InputIndexNum) {
+          if (item.index === Number(inputIndex)) {
             this.errorFlag = false;
             this.scrollGotoIndex.nativeElement.scrollTop = this.arrSequences.indexOf(seq1) * 40;
           }
@@ -130,15 +115,9 @@ export class AppComponent implements OnInit {
     }
   }
   checksStringWithRegex(index): boolean {
-    const res = /^([a-z]{0,})$/.test(index); // checks if empty || only string
-    const res2 = /\D+/.test(index); // checks if only digits
+    const res = /^([a-z]{0,})$/.test(index);
+    const res2 = /\D+/.test(index);
     if (res || res2) {
-      return true;
-    }
-    return false;
-  }
-  checkNumberRange(index): boolean {
-    if (index < 35152 && index > 0) {
       return true;
     }
     return false;
@@ -146,17 +125,6 @@ export class AppComponent implements OnInit {
 
   onFocusMethod(deleteInput: HTMLInputElement): void {
     deleteInput.value = '';
-
-    switch (deleteInput['name']) {
-
-      case 'delete':
-        this.errorFlagDel = false;
-        this.errorFlagDel2 = false;
-        break;
-      case 'goto':
-        this.errorFlag = false;
-        break;
-    }
   }
 
 }

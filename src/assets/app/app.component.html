@@ -1,11 +1,6 @@
-<div class="page_scroller" #scrollGoto>
-  <app-sequence-line *ngFor="let seq of arrSequences; index as i" [sequence]="seq"></app-sequence-line>
-</div>
-
 <div class="controllers">
-  <h2>Sequence Editor</h2>
   <div class="container">
-    <div class="title">Add Annotation:</div>
+    <span>Add Annotation:</span>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="form-control">
         <label for="index">index</label>
@@ -15,7 +10,7 @@
 
       <div class="form-control">
         <label for="length">length</label>
-        <input type="text" id="length" formControlName="length" autocomplete="off" pattern="^(?:[1-9]|[1-4][0-9]|50)$">
+        <input type="text" id="length" formControlName="length" autocomplete="off"  pattern="^(?:[1-9]|[1-4][0-9]|50)$">
         <span *ngIf="!signupForm.get('length').valid && signupForm.get('length').touched" class="help-block">Please enter a valid length between 1-50</span>
       </div>
 
@@ -24,21 +19,25 @@
         <input type="text" id="tooltip" formControlName="tooltip" autocomplete="off">
         <span *ngIf="!signupForm.get('tooltip').valid && signupForm.get('tooltip').touched" class="help-block">Please enter a valid tooltip</span>
       </div>
-      <button class="btnSubmit" type="submit">Add</button>
+      <button class="btn btn-primary" type="submit">Add</button>
     </form>
   </div>
 
-  <div class='delete'>
-    <div class="title">Delete Annotation Index:</div>
-    <input #myInput type="text" name="delete" alt="track cover" tabindex="-1" (focus)="onFocusMethod($event.target)">
+  <div>
+    <div>Delete Annotation Index:</div>
+    <input #myInput type="text" name="trackNAme" alt="track cover" tabindex="-1" (focus)="onFocusMethod($event.target)">
     <label class="deleteButton" [for]="'myInput'" (click)="deleteAnnotation(myInput.value)">ok</label>
-    <span class='errorMessage' *ngIf='errorFlagDel'>please insert only digits between 1-35,151</span>
-    <span class='errorMessage' *ngIf='errorFlagDel2'>Input value doesn't exist in the Annotations</span>
   </div>
-  <div class='goTo'>
-    <div class="title">Go To Annotation Index:</div>
+  <div>
+    <div>Go To Annotation Index:</div>
     <input #goto type="text" name="goto" alt="go to" tabindex="-1" (focus)="onFocusMethod($event.target)">
     <label class="gotoButton" [for]="'goto'" (click)="goToAnnotation(goto.value)">ok</label>
-    <span class='errorMessage' *ngIf='errorFlag'>Input value doesn't exist in the Annotations</span>
+    <span class='errorMessage' *ngIf='errorFlag'>The input value doesn't exist in the Annotations</span>
   </div>
+</div>
+<div class="numc">
+  1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,20,1,2,3,4,5,6,7,8,9,30,1,2,3,4,5,6,7,8,9,40,1,2,3,4,5,6,7,8,9,50</div>
+
+<div class="page_scroller" #scrollGoto>
+  <app-sequence-line *ngFor="let seq of arrSequences; index as i" [sequence]="seq"></app-sequence-line>
 </div>

@@ -1,35 +1,104 @@
-label.deleteButton {
-  width: 100px;
-  background-color: #e6e6e6;
-  padding: 3px 6px;
-  margin: 0;
-  font: 400 13.3333px Arial;
-  border: 1px solid gray;
-  margin-right: 10px;
-}
-
-.numc {
+:host {
   display: flex;
-  justify-content: flex-start;
-  font: 18.5px 'Sofadi One', cursive;
-  margin-left: 70px;
-}
+  flex-direction: row;
+  justify-content: space-around;
 
-.page_scroller {
-  width: 1200px;
-  height: auto;
-  max-height: 600px;
-  overflow-y: scroll;
+  .page_scroller {
+    width: 950px;
+    height: auto;
+    max-height: 600px;
+    overflow-y: scroll;
+    display: block;
+    position: relative;
+    margin-top: 35px;
 
-  .sequences {
-    display: flex;
-    justify-content: flex-start;
-    font: 18px 'Sofadi One', cursive;
+    .sequences {
+      display: flex;
+      justify-content: flex-start;
+      font: 18px 'Sofadi One', cursive;
 
-    span {
-      color: #b8b8b8;
-      width: 50px;
-      text-align: center;
+      span {
+        color: #b8b8b8;
+        width: 50px;
+        text-align: center;
+      }
     }
   }
+
+  .controllers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: start;
+
+    .container {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e6e6e6;
+      margin-bottom: 10px;
+
+      .title {
+        padding: 5px 0;
+      }
+
+      .form-control {
+        position: relative;
+        margin-bottom: 15px;
+
+        label {
+          width: 45px;
+          display: inline-block;
+          text-align: left;
+        }
+
+        .help-block {
+          position: absolute;
+          left: 0;
+          right: auto;
+          width: 245px;
+          top: 20px;
+          display: block;
+          color: #ff0000;
+          font-size: 15px;
+        }
+      }
+
+      button.btnSubmit {
+        cursor: pointer;
+      }
+    }
+
+    .delete,
+    .goTo {
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e6e6e6;
+      margin-bottom: 10px;
+
+      .title {
+        padding: 5px 0;
+      }
+
+      label.deleteButton,
+      label.gotoButton {
+        width: 100px;
+        background-color: #e6e6e6;
+        padding: 3px 6px;
+        margin: 0;
+        font: 400 13.3333px Arial;
+        border: 1px solid gray;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .errorMessage {
+        display: inherit;
+        color: red;
+        font-size: 15px;
+        width: 190px;
+        margin: 0;
+        text-align: left;
+      }
+    }
+  }
+
 }

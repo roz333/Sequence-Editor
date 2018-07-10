@@ -37,7 +37,10 @@ export class SequencesService {
     return this.annotations;
   }
   delAnnotations(del) {
+    console.log('DELETE service set', del);
     this.annotations = this.annotations.filter(item => item.index !== Number(del));
+
+    console.log('DELETE service set', this.annotations);
   }
 
   addAnnotationToservice(formObjectValue): IAnnotation {
@@ -46,6 +49,7 @@ export class SequencesService {
       tooltip: formObjectValue.tooltip
     };
     this.annotations.push(annotation);
+    console.log('addAnnotationFromservice', this.annotations);
     return annotation;
   }
 }

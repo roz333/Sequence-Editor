@@ -6,13 +6,15 @@ import { SequencesService } from './shared/services/sequences.service';
 import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceLineComponent } from './sequence-line/sequence-line.component';
 import { TooltipModule } from 'ngx-tooltip';
+import { AnnotationFuncsComponent } from './annotation-funcs/annotation-funcs.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     SequencesComponent,
-    SequenceLineComponent
+    SequenceLineComponent,
+    AnnotationFuncsComponent
   ],
   imports: [
     BrowserModule,
