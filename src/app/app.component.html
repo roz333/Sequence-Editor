@@ -9,13 +9,13 @@
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="form-control">
         <label for="index">index</label>
-        <input type="text" id="index" formControlName="index" autocomplete="off" pattern="^[0-9]{1,5}$">
+        <input type="text" id="index" formControlName="index" autocomplete="off" pattern="^[0-9]{1,4}$">
         <span *ngIf="!signupForm.get('index').valid && signupForm.get('index').touched" class="help-block">Please enter a valid index(number)</span>
       </div>
 
       <div class="form-control">
         <label for="length">length</label>
-        <input type="text" id="length" formControlName="length" autocomplete="off" pattern="^(?:[1-9]|[1-4][0-9]|50)$">
+        <input type="text" id="length" formControlName="length" autocomplete="off">
         <span *ngIf="!signupForm.get('length').valid && signupForm.get('length').touched" class="help-block">Please enter a valid length between 1-50</span>
       </div>
 
@@ -24,7 +24,7 @@
         <input type="text" id="tooltip" formControlName="tooltip" autocomplete="off">
         <span *ngIf="!signupForm.get('tooltip').valid && signupForm.get('tooltip').touched" class="help-block">Please enter a valid tooltip</span>
       </div>
-      <button class="btnSubmit" type="submit">Add</button>
+      <button class="btnSubmit" type="submit" [disabled]="!signupForm.valid">Add</button>
     </form>
   </div>
 

@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
 
     this.signupForm = new FormGroup({
       'index': new FormControl(null, [Validators.required]),
-      'length': new FormControl(null, [Validators.required]),
+      'length': new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|[1-4][0-9]|50)$'),
+      Validators.minLength(2), ]),
       'tooltip': new FormControl(null, [Validators.required])
     });
     this.errorFlag = false;
@@ -116,16 +117,11 @@ export class AppComponent implements OnInit {
     } else {
       const seq1: ISequence = this.arrSequences.find((seq: ISequence) => InputIndexNum >= seq.from && InputIndexNum <= seq.to);
       if (seq1.annotations.length > 0) {
-        let flag = false;
         seq1.annotations.forEach(item => {
+          this.errorFlag = true;
           if (item.index === InputIndexNum) {
             this.errorFlag = false;
-            flag = true;
             this.scrollGotoIndex.nativeElement.scrollTop = this.arrSequences.indexOf(seq1) * 40;
-            console.log('happy item.index', item.index);
-          } else if (!flag) {
-            this.errorFlag = true;
-            console.log('else', item.index);
           }
         });
       } else {
@@ -147,6 +143,12 @@ export class AppComponent implements OnInit {
       return true;
     }
     return false;
+  }
+  checkRange(index) {
+    if (index < 50 && index > 0) {
+      return true;
+    }
+    return { index: { valid: false } };
   }
 
   onFocusMethod(deleteInput: HTMLInputElement): void {
